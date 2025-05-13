@@ -129,11 +129,15 @@ namespace MathFunctions
             return crossProduct;
         }
 
-        public static Vector3 GetCentre(Vector3 a, Vector3 b, Vector3 c)
+        public static Vector3 GetCentre(List<Vector3> points)
         {
             // We can use the center to get the new vector
-            Vector3 center = (a + b + c) / 3;
-            return center;
+            Vector3 center = Vector3.zero;
+            foreach (var point in points)
+            {
+                center += point;
+            }
+            return center / points.Count;
         }
     }
 }

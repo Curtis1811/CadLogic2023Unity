@@ -35,7 +35,7 @@ public class NormalFaceDirection : MonoBehaviour
         CreateMesh(verticies);
 
         Vector3 FaceDirection = MathHelper.GetNormalFaceDirection(verticies[0], verticies[1], verticies[2]);
-        Vector3 centre = MathHelper.GetCentre(verticies[0], verticies[1], verticies[2]);
+        Vector3 centre = MathHelper.GetCentre(verticies);
         // Draw the points to the screen
         VisualHelper.DrawLineToScreen(centre, centre + FaceDirection * 1, Color.blue);
 

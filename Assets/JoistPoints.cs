@@ -41,6 +41,7 @@ public class JoistPoints : MonoBehaviour
             // We are going to draw the points to the screen
             VisualHelper.DrawPointsToScreen(point, color: Color.red);
         }
+        
     }
 
     // Update is called once per frame
