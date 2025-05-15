@@ -1,5 +1,5 @@
 {
-    "name": "UserKeyboardControlls",
+    "name": "UserKeyboardControls",
     "maps": [
         {
             "name": "UserActionMap",
@@ -10,6 +10,15 @@
                     "type": "Value",
                     "id": "4cd4a510-650a-47ef-ae01-037c71e36bfb",
                     "expectedControlType": "Vector3",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Rotation",
+                    "type": "Value",
+                    "id": "14857ca5-5559-4ff2-a35c-4d3d4a6cba36",
+                    "expectedControlType": "Stick",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
@@ -30,7 +39,7 @@
                 {
                     "name": "up",
                     "id": "054cc59c-355e-4dd5-9f2a-bc8e14bf04a0",
-                    "path": "",
+                    "path": "<Keyboard>/leftShift",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -41,7 +50,7 @@
                 {
                     "name": "down",
                     "id": "808ab893-941a-469e-b8f0-ed1235335f41",
-                    "path": "",
+                    "path": "<Keyboard>/leftCtrl",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -52,7 +61,7 @@
                 {
                     "name": "left",
                     "id": "c6710dfc-58c6-4839-9eaa-1f38aa55bf08",
-                    "path": "",
+                    "path": "<Keyboard>/a",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -63,7 +72,7 @@
                 {
                     "name": "right",
                     "id": "729770a4-647d-4c07-8fcb-aadb548ba741",
-                    "path": "",
+                    "path": "<Keyboard>/d",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -74,7 +83,7 @@
                 {
                     "name": "forward",
                     "id": "f651c401-8bbe-4267-9f79-d0a6dea8740d",
-                    "path": "",
+                    "path": "<Keyboard>/w",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -85,11 +94,66 @@
                 {
                     "name": "backward",
                     "id": "c4f838af-d0eb-48c8-bbad-9b4974dc4435",
-                    "path": "",
+                    "path": "<Keyboard>/s",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "Movement",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "2D Vector",
+                    "id": "3e77bc70-ec5a-4f98-89c3-1c22b56980d1",
+                    "path": "2DVector",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Rotation",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "Up",
+                    "id": "ae2eeb6e-f9f2-4be9-9c38-34153f5a1a64",
+                    "path": "<Mouse>/delta/up",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Rotation",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "Down",
+                    "id": "ff9ed766-0ea3-4e3a-a97e-6b5ec4915129",
+                    "path": "<Mouse>/delta/down",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Rotation",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "Left",
+                    "id": "1b2b015f-a92a-4ee4-8f19-252cde7f01a2",
+                    "path": "<Mouse>/delta/left",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Rotation",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "Right",
+                    "id": "b33297ca-65dd-4ec0-b658-822da566fdee",
+                    "path": "<Mouse>/delta/right",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Rotation",
                     "isComposite": false,
                     "isPartOfComposite": true
                 }
