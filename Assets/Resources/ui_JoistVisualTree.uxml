@@ -1,0 +1,15 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:VisualElement name="Container" style="flex-grow: 1; margin-top: 0; margin-right: 0; background-color: rgba(229, 64, 64, 0); width: 100%; position: absolute; height: 100%;">
+        <ui:VisualElement name="MenuBar" style="flex-grow: 1; width: 20%; height: 100%; align-items: flex-start; justify-content: flex-start; background-color: rgba(233, 140, 140, 0.36); align-self: auto;">
+            <ui:Button text="Hide UI" parse-escape-sequences="true" display-tooltip-when-elided="true" name="ShowHide" style="white-space: nowrap; -unity-text-align: middle-center; text-overflow: ellipsis; align-items: auto; justify-content: space-around; align-self: center; width: 50%;" />
+            <ui:Toggle label="Place Points" name="PlacePoints" style="height: 41px; width: 180px; align-self: stretch; align-items: center; justify-content: space-between;" />
+            <ui:Toggle label="Align" />
+            <ui:FloatField label="Length" value="0" />
+            <ui:FloatField label="Width" value="0" name="Width" />
+            <ui:FloatField label="Height" value="0" name="Height" readonly="true" />
+            <ui:Button text="Generate" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Generate" style="width: 50%; height: 38px; align-items: center; justify-content: center; text-overflow: ellipsis; align-self: center;" />
+            <ui:Button text="Clear" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Clear" style="width: 50%; height: auto; align-items: center; justify-content: center; text-overflow: ellipsis; align-self: center;" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+    <ui:VisualElement name="Interaction" style="flex-grow: 1; align-items: flex-end; width: 80%; height: 100%; align-self: flex-end; background-color: rgb(149, 149, 149); border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); border-top-width: 3px; border-right-width: 3px; border-bottom-width: 3px; border-left-width: 3px;" />
+</ui:UXML>

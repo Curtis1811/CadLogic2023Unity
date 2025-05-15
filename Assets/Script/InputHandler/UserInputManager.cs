@@ -21,13 +21,13 @@ public class UserInputManager
     // Update is called once per frame
     private void MoveAction(InputAction.CallbackContext ctx)
     {
-        Debug.Log("[UserInputManager][MoveAction] Direction : " + ctx.ReadValue<Vector3>());
+        //Debug.Log("[UserInputManager][MoveAction] Direction : " + ctx.ReadValue<Vector3>());
         _inputEvents.MoveCamera?.Invoke(ctx.ReadValue<Vector3>());
     }
 
     private void RotateAction(InputAction.CallbackContext ctx)
     {
-        Debug.Log("[UserInputManager][RotateAction] Direction : " + ctx.ReadValue<Vector2>());
+        //Debug.Log("[UserInputManager][RotateAction] Direction : " + ctx.ReadValue<Vector2>());
         _inputEvents.RotateCamera?.Invoke(ctx.ReadValue<Vector2>());
     }
 

@@ -6,6 +6,7 @@ using VisualRerendering;
 
 public class NormalFaceDirection : MonoBehaviour
 {
+    VisualHelper visualHelper;
 
     struct Data
     {
@@ -21,6 +22,7 @@ public class NormalFaceDirection : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        visualHelper = new VisualHelper();
         List<Vector3> verticies = new List<Vector3>
         {
             new Vector3(1, 1, 5),
@@ -37,7 +39,7 @@ public class NormalFaceDirection : MonoBehaviour
         Vector3 FaceDirection = MathHelper.GetNormalFaceDirection(verticies[0], verticies[1], verticies[2]);
         Vector3 centre = MathHelper.GetCentre(verticies);
         // Draw the points to the screen
-        VisualHelper.DrawLineToScreen(centre, centre + FaceDirection * 1, Color.blue);
+        visualHelper.DrawLineToScreen(centre, centre + FaceDirection * 1, Color.blue);
 
     }
 

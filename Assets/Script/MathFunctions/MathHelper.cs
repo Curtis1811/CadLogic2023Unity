@@ -46,6 +46,7 @@ namespace MathFunctions
 
         }
 
+
         public static float GetLength(Vector2 a, Vector2 b)
         {
             // We can use the pythagorean theorem to get the length of the line

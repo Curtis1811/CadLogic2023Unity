@@ -2,17 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class JoistManager : MonoBehaviour
+public class JoistManager
 {
     // Start is called before the first frame update
-    void Start()
+    JoistEvents _joistEvents;
+    GenerateJoist _generateJoist;
+
+    public JoistManager()
     {
-        
+        _joistEvents = new JoistEvents();
+        _generateJoist = new GenerateJoist(_joistEvents);
     }
 
-    // Update is called once per frame
-    void Update()
+    public JoistEvents joistEvents()
     {
-        
+        return _joistEvents;
     }
+
+
 }

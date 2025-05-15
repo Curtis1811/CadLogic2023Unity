@@ -14,7 +14,6 @@ public class CameraComponenet
         if (camera == null)
         {
             Debug.LogError("[CameraControls][CameraControls] Camera is null");
-
         }
 
         _camera = camera;
