@@ -4,9 +4,9 @@
             <ui:Button text="Hide UI" parse-escape-sequences="true" display-tooltip-when-elided="true" name="ShowHide" style="white-space: nowrap; -unity-text-align: middle-center; text-overflow: ellipsis; align-items: auto; justify-content: space-around; align-self: center; width: 50%;" />
             <ui:Toggle label="Place Points" name="PlacePoints" style="height: 41px; width: 180px; align-self: stretch; align-items: center; justify-content: space-between;" />
             <ui:Toggle label="Align" />
-            <ui:FloatField label="Length" value="0" />
-            <ui:FloatField label="Width" value="0" name="Width" />
-            <ui:FloatField label="Height" value="0" name="Height" readonly="true" />
+            <ui:FloatField label="Length" value="0" name="Length" />
+            <ui:FloatField label="Width" value="0" name="Width" readonly="false" is-delayed="false" />
+            <ui:FloatField label="Height" value="0" name="Height" readonly="false" focusable="true" />
             <ui:Button text="Generate" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Generate" style="width: 50%; height: 38px; align-items: center; justify-content: center; text-overflow: ellipsis; align-self: center;" />
             <ui:Button text="Clear" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Clear" style="width: 50%; height: auto; align-items: center; justify-content: center; text-overflow: ellipsis; align-self: center;" />
         </ui:VisualElement>

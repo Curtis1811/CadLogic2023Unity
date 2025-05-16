@@ -1,4 +1,5 @@
 
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -20,11 +21,18 @@ public class JoistUI : MonoBehaviour
     private Button _showHideUI;
     private Button _GenerateMeshButton;
     private Button _clearButton;
+    #endregion
 
+    #region Data
+    private FloatField _width;
+    private FloatField _height;
+    private FloatField _length;
     #endregion
 
     public UIEvents uiEvents;
 
+    // TODO: Needs to be changed to use Local Position of Points but requires a change to listen to Canvas update.
+    private List<Vector2> _dataPoints = new List<Vector2>();
 
     // Start is called before the first frame update
     void Start()
@@ -37,7 +45,7 @@ public class JoistUI : MonoBehaviour
         _menuBar = _uiDocument.rootVisualElement.Q("MenuBar");
 
         _GenerateMeshButton = _uiDocument.rootVisualElement.Q<Button>("Generate");
-        _GenerateMeshButton?.RegisterCallback<ClickEvent>(ConvertToUnitys);
+        _GenerateMeshButton?.RegisterCallback<ClickEvent>(GenerateMesh);
 
         _clearButton = _uiDocument.rootVisualElement.Q<Button>("Clear");
         _clearButton?.RegisterCallback<ClickEvent>(ClearPoints);
@@ -49,11 +57,14 @@ public class JoistUI : MonoBehaviour
 
         _showHideUI = _uiDocument.rootVisualElement.Q<Button>("ShowHide");
         _showHideUI?.RegisterCallback<ClickEvent>(ShowHideUi);
+
+        _width = _uiDocument.rootVisualElement.Q<FloatField>("Width");
+        _height = _uiDocument.rootVisualElement.Q<FloatField>("Height");
+        _length = _uiDocument.rootVisualElement.Q<FloatField>("Length");
     }
 
     private void AddPointsToggle(ClickEvent evt)
     {
-
         if (_AddPointButton.value)
         {
             _canvas?.RegisterCallback<ClickEvent>(AddPointToCanvas);
@@ -83,31 +94,44 @@ public class JoistUI : MonoBehaviour
 
         point.style.left = evt.position.x - _menuBar.resolvedStyle.width - (radius / 2);
         point.style.top = evt.position.y - (radius / 2);
-        //point.transform.position = evt.position;
-        _canvas.Add(point);
+
+        _dataPoints.Add(new Vector2(evt.position.x, evt.position.y));
         _points.Add(point);
+        _canvas.Add(point);
+
+        SetWidth();
     }
 
-    private void ConvertToUnitys(ClickEvent evt)
+    private void SetWidth()
     {
-        var point = new Vector2(_points[0].resolvedStyle.left, _points[0].resolvedStyle.top);
-        var point2 = new Vector2(_points[1].resolvedStyle.left, _points[1].resolvedStyle.top);
-        float distance = Vector2.Distance(point, point2);
-        // Debug.Log("[JoistUI][ConvertToUnitys] Pixels : " + distance / 100f);
-        // Debug.Log("[JoistUI][ConvertToUnitys] Pixels : " + distance);
-        DrawJoist(distance);
-        List<Vector2> points = new List<Vector2>
+        if (_points.Count >= 2)
         {
-            point,
-            point2
-        };
+            _length.value = ConvertToUnitys(Vector2.Distance(_dataPoints[0], _dataPoints[1]));
+            DrawJoistOutline(_width.value);
+        }
+    }
 
-        uiEvents?.OnGenerateMesh?.Invoke(points, distance, 0);
-
-
+    private float ConvertToUnitys(float pixels)
+    {
         // Convert pixels to Unity units
         //float unityUnits = pixels / 100f; // Assuming 100 pixels = 1 unit in Unity
-        //return unityUnits;
+        float unityUnits = pixels / 100f;
+        return unityUnits;
+    }
+
+    private void GenerateMesh(ClickEvent evt)
+    {
+        List<Vector2> convertedPoint = new List<Vector2>();
+
+        foreach (var point in _dataPoints)
+        {
+            var x = ConvertToUnitys(point.x);
+            var y = ConvertToUnitys(point.y);
+
+            convertedPoint.Add(new Vector2(x, y));
+        }
+
+        uiEvents?.OnGenerateMesh?.Invoke(convertedPoint, _width.value, _height.value);
     }
 
     private void ShowHideUi(ClickEvent evt)
@@ -138,9 +162,10 @@ public class JoistUI : MonoBehaviour
             _canvas.Remove(ve);
         }
         _points.Clear();
+        _dataPoints.Clear();
     }
 
-    private void DrawJoist(float width)
+    private void DrawJoistOutline(float width)
     {
         VisualElement line = new VisualElement();
         line.style.position = Position.Absolute;
@@ -150,17 +175,15 @@ public class JoistUI : MonoBehaviour
             // Draw the line here
             // You can use a LineRenderer or any other method to draw the line
             context.painter2D.strokeColor = Color.red;
-            context.painter2D.lineWidth = 12;
+            context.painter2D.lineWidth = 9;
             context.painter2D.fillColor = Color.red;
             context.painter2D.strokeColor = Color.red;
             context.painter2D.lineJoin = LineJoin.Round;
             context.painter2D.lineCap = LineCap.Round;
 
             context.painter2D.BeginPath();
-            context.painter2D.MoveTo(new Vector2(0, 0));
-            context.painter2D.LineTo(new Vector2(1920, 1080));
-            Debug.Log("[JoistUI][DrawJoist] Point 1 : X " + _points[0].resolvedStyle.left + " Y " + _points[0].resolvedStyle.top);
-            Debug.Log("[JoistUI][DrawJoist] Point 2 : X " + _points[1].resolvedStyle.left + " Y " + _points[1].resolvedStyle.top);
+            context.painter2D.MoveTo(_dataPoints[0]);
+            context.painter2D.LineTo(_dataPoints[1]);
             context.painter2D.Stroke();
         };
 

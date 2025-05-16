@@ -46,6 +46,17 @@ namespace MathFunctions
 
         }
 
+        public static Vector3 RotateVector(Vector3 vector, Vector3 axis, float angle)
+        {
+            Vector3 vxp = Vector3.Cross(axis, vector);
+            Vector3 vxvxp = Vector3.Cross(axis, vxp);
+            return vector + Mathf.Sin(angle) * vxp + (1 - Mathf.Cos(angle)) * vxvxp;
+        }
+
+        public static void RotateVectorAboutPoint(Vector3 vector, Vector3 pivot, Vector3 axis, float angle, out Vector3 rotatedVector)
+        {
+            rotatedVector = RotateVector(vector - pivot, axis, angle);
+        }
 
         public static float GetLength(Vector2 a, Vector2 b)
         {
@@ -88,6 +99,18 @@ namespace MathFunctions
             float y = a.x * Mathf.Sin(radian) + a.y * Mathf.Cos(radian);
 
             dir = new Vector2(x, y);
+
+            Debug.Log("RotatedVector: " + x);
+            Debug.Log("RotatedVector: " + y);
+        }
+
+        public static void RotateVectorAroundAxis(Vector3 a, float radian, Vector3 Axis, out Vector3 dir)
+        {
+            // We can use the angle to get the new vector
+            float x = a.x * Mathf.Cos(radian) - a.y * Mathf.Sin(radian);
+            float y = a.x * Mathf.Sin(radian) + a.y * Mathf.Cos(radian);
+
+            dir = new Vector3(x, y, a.z);
 
             Debug.Log("RotatedVector: " + x);
             Debug.Log("RotatedVector: " + y);
