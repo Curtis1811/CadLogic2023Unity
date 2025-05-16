@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using MathFunctions;
 using VisualRerendering;
+using UnityEngine.UIElements;
 
 public class GenerateJoist
 {
@@ -56,22 +57,18 @@ public class GenerateJoist
         visualHelper.DrawPointsToScreen(points[1], Color.red);
         visualHelper.DrawLineToScreen(points[0], points[1], Color.red);
 
-        foreach (var point in points2D)
-        {
-            // We are going to draw the points to the screen
-            visualHelper.DrawPointsToScreen(point, color: Color.red);
-        }
-
         List<Vector3> pointsToVector3 = new List<Vector3>();
 
         foreach (var point in points2D)
         {
             // We are going to draw the points to the screen
+            visualHelper.DrawPointsToScreen(point, color: Color.red);
             pointsToVector3.Add(new Vector3(point.x, point.y, 0));
         }
 
         foreach (var point in pointsToVector3)
         {
+
             //MathHelper.CrossProduct(point, points[1], out Vector2 crossProduct);
 
             //rotation *= height / 2;

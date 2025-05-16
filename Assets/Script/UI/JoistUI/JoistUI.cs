@@ -63,8 +63,23 @@ public class JoistUI : MonoBehaviour
         _length = _uiDocument.rootVisualElement.Q<FloatField>("Length");
     }
 
+    void Update()
+    {
+        if (_points.Count >= 2)
+        {
+            _AddPointButton.value = false;
+            return;
+        }
+    }
+
     private void AddPointsToggle(ClickEvent evt)
     {
+        if (_points.Count >= 2)
+        {
+            _AddPointButton.value = false;
+            return;
+        }
+
         if (_AddPointButton.value)
         {
             _canvas?.RegisterCallback<ClickEvent>(AddPointToCanvas);
@@ -78,7 +93,7 @@ public class JoistUI : MonoBehaviour
     private void AddPointToCanvas(ClickEvent evt)
     {
         // Create a new point at the mouse position
-        if (_points.Count >= 1)
+        if (_points.Count >= 2)
         {
             _AddPointButton.value = false;
             return;

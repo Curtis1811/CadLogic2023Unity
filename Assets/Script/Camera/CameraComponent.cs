@@ -36,8 +36,8 @@ public class CameraComponenet
     private void UpdateCameraPositionAndRotation()
     {
         _camera.transform.position += _cameraDirection * 4 * Time.deltaTime;
-        _camera.transform.Rotate(Vector3.up, _cameraRotation.x * Time.deltaTime);
-        _camera.transform.Rotate(Vector3.left, _cameraRotation.y * Time.deltaTime);
+        _camera.transform.Rotate(Vector3.up, _cameraRotation.x * Time.deltaTime * 5);
+        _camera.transform.Rotate(Vector3.left, _cameraRotation.y * Time.deltaTime * 5);
     }
 
     private void RotateCameraWorldSpace(Vector2 direction)
