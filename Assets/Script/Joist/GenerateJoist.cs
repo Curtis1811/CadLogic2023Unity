@@ -2,13 +2,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using MathFunctions;
 using VisualRerendering;
-using System;
-using Unity.VisualScripting;
 
 public class GenerateJoist
 {
     VisualHelper visualHelper;
-    JoistEvents _joistEventDispatcher;
+    JoistEvents _joistEvents;
 
     public struct Data
     {
@@ -26,9 +24,9 @@ public class GenerateJoist
 
     public GenerateJoist(JoistEvents joistEvents)
     {
-        _joistEventDispatcher = joistEvents;
-        _joistEventDispatcher.OnGenerateMesh += GenerateMesh;
-
+        _joistEvents = joistEvents;
+        _joistEvents.OnGenerateMesh += GenerateMesh;
+        _joistEvents.OnClear += Clear;
 
         visualHelper = new VisualHelper();
         //Data staticData = new Data();
@@ -46,7 +44,6 @@ public class GenerateJoist
         //     // We are going to draw the points to the screen
         //     visualHelper.DrawPointsToScreen(point, color: Color.red);
         // }
-
     }
 
 
@@ -69,17 +66,27 @@ public class GenerateJoist
 
         foreach (var point in points2D)
         {
-            //MathHelper.CrossProduct(point, points[1], out Vector2 crossProduct);
-            MathHelper.RotateVectorAboutPoint(point, Vector3.zero, new Vector3(0, 1, 0), 1.57f, out Vector3 rotatedVector);
-            rotatedVector *= height / 2;
-            visualHelper.DrawPointsToScreen(new Vector3(rotatedVector.x, rotatedVector.y, rotatedVector.z), Color.red);
-            visualHelper.DrawLineToScreen(new Vector3(rotatedVector.x, rotatedVector.y, rotatedVector.z), new Vector3(rotatedVector.x, rotatedVector.y, 0) + new Vector3(0, 0, height), Color.red);
+            // We are going to draw the points to the screen
+            pointsToVector3.Add(new Vector3(point.x, point.y, 0));
+        }
 
-            MathHelper.RotateVector(point, -1.57f, out Vector2 rotatedVector2);
-            rotatedVector2 *= height / 2;
-            pointsToVector3.Add(new Vector3(rotatedVector.x, rotatedVector.y, 0));
-            visualHelper.DrawPointsToScreen(new Vector3(rotatedVector2.x, rotatedVector2.y, rotatedVector.z), Color.red);
-            visualHelper.DrawLineToScreen(new Vector3(rotatedVector2.x, rotatedVector2.y, 0), new Vector3(rotatedVector2.x, rotatedVector2.y, 0) + new Vector3(0, 0, height), Color.red);
+        foreach (var point in pointsToVector3)
+        {
+            //MathHelper.CrossProduct(point, points[1], out Vector2 crossProduct);
+
+            //rotation *= height / 2;
+
+            // MathHelper.RotateVectorAboutPoint(point, Vector3.zero, new Vector3(0, 1, 0), 1.57f, out Vector3 rotatedVector);
+
+            // rotatedVector *= height / 2;
+            // visualHelper.DrawPointsToScreen(new Vector3(rotatedVector.x, rotatedVector.y, rotatedVector.z), Color.red);
+            // visualHelper.DrawLineToScreen(new Vector3(rotatedVector.x, rotatedVector.y, rotatedVector.z), new Vector3(rotatedVector.x, rotatedVector.y, 0) + new Vector3(0, 0, height), Color.red);
+
+            // MathHelper.RotateVector(point, -1.57f, out Vector2 rotatedVector2);
+            // rotatedVector2 *= height / 2;
+
+            // visualHelper.DrawPointsToScreen(new Vector3(rotatedVector2.x, rotatedVector2.y, rotatedVector.z), Color.red);
+            // visualHelper.DrawLineToScreen(new Vector3(rotatedVector2.x, rotatedVector2.y, 0), new Vector3(rotatedVector2.x, rotatedVector2.y, 0) + new Vector3(0, 0, height), Color.red);
         }
 
         // Create a mesh from the points
@@ -88,6 +95,12 @@ public class GenerateJoist
         //MathHelper.JoistWidth2D(points[0], points[1], data.width, out List<Vector2> points);
         List<Vector3> points3D = new List<Vector3>();
         //visualHelper.CreateMesh(points);
+    }
+
+    private void Clear()
+    {
+        // Clear the points
+        visualHelper.ClearGeneratedObjects();
     }
 
 }

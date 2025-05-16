@@ -78,6 +78,12 @@ public class JoistUI : MonoBehaviour
     private void AddPointToCanvas(ClickEvent evt)
     {
         // Create a new point at the mouse position
+        if (_points.Count >= 1)
+        {
+            _AddPointButton.value = false;
+            return;
+        }
+
         float radius = 15f;
         var point = new VisualElement();
         point.style.position = Position.Absolute;
@@ -138,12 +144,12 @@ public class JoistUI : MonoBehaviour
     {
         if (_showHideUI.text == "Hide UI")
         {
-            _canvas.style.display = DisplayStyle.Flex;
+            _canvas.style.display = DisplayStyle.None;
             _showHideUI.text = "Show UI";
         }
         else
         {
-            _canvas.style.display = DisplayStyle.None;
+            _canvas.style.display = DisplayStyle.Flex;
             _showHideUI.text = "Hide UI";
         }
     }
@@ -163,6 +169,7 @@ public class JoistUI : MonoBehaviour
         }
         _points.Clear();
         _dataPoints.Clear();
+        uiEvents?.OnClear?.Invoke();
     }
 
     private void DrawJoistOutline(float width)

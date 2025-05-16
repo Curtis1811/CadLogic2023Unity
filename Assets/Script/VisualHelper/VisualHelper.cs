@@ -6,8 +6,13 @@ namespace VisualRerendering
 {
     // This class is used to draw points and lines to the screen
     // It is used for debugging purposes
+
+
+
     public class VisualHelper
     {
+        List<GameObject> _generatedGameOjects = new List<GameObject>();
+
         public void DrawPointsToScreen(Vector3 Position, Color color = default)
         {
             // We are creating a point out of a primitive sphere
@@ -16,6 +21,7 @@ namespace VisualRerendering
             point.transform.position = Position;
             point.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
             point.GetComponent<Renderer>().material.color = color;
+            _generatedGameOjects.Add(point);
         }
 
         public void DrawLineToScreen(Vector3 start, Vector3 end, Color color = default)
@@ -27,6 +33,7 @@ namespace VisualRerendering
             line.transform.localScale = new Vector3(0.01f, 0.01f, Vector3.Distance(start, end));
             line.transform.LookAt(end);
             line.GetComponent<Renderer>().material.color = color;
+            _generatedGameOjects.Add(line);
         }
 
         public void CreateMesh(List<Vector3> verticies)
@@ -62,7 +69,20 @@ namespace VisualRerendering
                 triangles.Add(i + 1);
                 triangles.Add(i + 2);
             }
+
+            _generatedGameOjects.Add(gameObject);
+
         }
+
+        public void ClearGeneratedObjects()
+        {
+            foreach (var obj in _generatedGameOjects)
+            {
+                GameObject.Destroy(obj);
+            }
+            _generatedGameOjects.Clear();
+        }
+
     }
 
 }

@@ -14,20 +14,26 @@ public class EventHandler
 
         #region UI Events
         _uiEvents.OnGenerateMesh += OnUIGenerateMesh;
+        _uiEvents.OnClear += OnClear;
         #endregion
     }
 
 
     public void OnUIGenerateMesh(List<Vector2> points, float width, float height)
     {
-        // Handle the event here
         _joistEventDispatcher.OnGenerateMesh?.Invoke(points, width, height);
+    }
+
+    public void OnClear()
+    {
+        _joistEventDispatcher.OnClear?.Invoke();
     }
 
     public void OnDestroy()
     {
         #region UI Events
         _uiEvents.OnGenerateMesh -= OnUIGenerateMesh;
+        _uiEvents.OnClear -= OnClear;
         #endregion
     }
 

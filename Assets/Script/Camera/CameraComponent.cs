@@ -43,7 +43,7 @@ public class CameraComponenet
     private void RotateCameraWorldSpace(Vector2 direction)
     {
         _cameraRotation = new Vector3(direction.x, direction.y, 0);
-        _camera.transform.Rotate(Vector3.up, direction.x);
+        //_camera.transform.Rotate(Vector3.up, direction.x);
     }
 
 }
